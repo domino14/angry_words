@@ -1,0 +1,44 @@
+{% load value_from_settings %}
+{% value_from_settings DEBUG_JS as DEBUG_JS %}
+<!doctype html>
+<html>
+<head>
+<link href="/static/lib/bootstrap/css/bootstrap-yeti.min.css" rel="stylesheet">
+<title>Crosswords</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Crosswords is a word game where you score points by placing words on a configurable grid.">
+<meta name="author" content="Cesar Del Solar">
+</head>
+<body>
+<div class="container">
+Hola, mundito. Como estas?
+</div>
+
+<!-- Require, etc -->
+<script>
+var require = {
+  config: {
+    'crosswords_main': {
+    }
+  }
+};
+</script>
+<script src="/static/lib/require/require-min.js"></script>
+<script>
+require.config({
+    {% if DEBUG_JS %}
+        paths: {
+            "crosswords_main": "/static/js/base/crosswords_main"
+        }
+
+    {% else %}
+        urlArgs: 'v={{CURRENT_VERSION}}',
+        paths: {
+            "crosswords_main": "/static/build/crosswords-main-built"
+        }
+    {% endif %}
+});
+require(["crosswords_main"]);
+</script>
+</body>
+</html>

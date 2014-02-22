@@ -1,0 +1,4 @@
+- Socket will be used for real-time and node.js will be used most likely for the actual game logic. Game state should be mostly in memory. Maybe for long-running games we can put it in Postgres, not sure. Not necessary to use Redis except for pub-sub (can Postgres handle that though?). Chat can be also cached in Redis / use socket for this. No need to use the DB for everything.
+- Django is for the metadata, such as the user stuff, saved games, game types.
+- API endpoints should be in Django. Django can talk to node. Everything except for the actual game moves should be Django API.
+- The actual game moves should go directly to Socket/Node, which can then figure out the score, etc. When the game is over it can either write directly to the DB, or maybe better yet make a call to Django with the update.
