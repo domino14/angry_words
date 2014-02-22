@@ -16,7 +16,7 @@ class Board(models.Model):
     users = models.ManyToManyField(User, through='UserBoardThrough')
     # The SHA-1 hash of the board and tile representation. SHA-1 may be
     # "weak" but if it's good enough for Git it's good enough for me.
-    hash = models.CharField(max_length=40)
+    hash = models.CharField(max_length=40, db_index=True)
 
 
 class UserBoardThrough(models.Model):
