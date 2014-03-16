@@ -12,6 +12,7 @@ requirejs.config({
     bootstrap: '../../../../static/lib/bootstrap/js/bootstrap',
     underscore: '../../../../static/lib/underscore-1.4.4',
     csrfAjax: '../../../../static/js/common/csrf_ajax',
+    Raphaël: '../../../../static/lib/raphael',
     mustache: '../../../../static/lib/mustache',
     text: '../../../../static/lib/require/text',
     backbone: '../../../../static/lib/backbone-1.0.0'
@@ -22,7 +23,7 @@ requirejs.config({
     },
     bootstrap: {
       deps: ['jquery'],
-      exports: '$.fn.tab'
+      exports: '$.fn.modal'
     },
     backbone: {
       deps: ['underscore', 'jquery'],
@@ -33,11 +34,16 @@ requirejs.config({
 
 define([
   'module',
-  'jquery'
-], function (module, $) {
+  'jquery',
+  'views/app'
+], function (module, $, App) {
   "use strict";
   $(function() {
-    console.log('wtf')
+    var app;
+    app = new App({
+      el: $('#app-view'),
+      boards: JSON.parse(module.config().boards)
+    });
 
 
   });

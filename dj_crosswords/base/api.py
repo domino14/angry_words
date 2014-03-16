@@ -29,3 +29,12 @@ def history(request):
     The /api/history endpoint.
     """
     pass
+
+
+def board_obj(board):
+    """
+    A Python obj representation of a board.
+    """
+    return {'tiles': json.loads(board.tiles_repr),
+            'board': json.loads(board.board_repr),
+            'hash': board.hash}
